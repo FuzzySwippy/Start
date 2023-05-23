@@ -1,8 +1,9 @@
 ﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace Start;
 
-public static class Program
+public static partial class Program
 {
     public static void Main(string[] args)
     {
@@ -106,8 +107,13 @@ public static class Program
 
     static void ParseAndExecuteLine(string line)
     { 
-        string[] parts = line.TrimStart().Split(' ');
-        if (parts.Length == 0)
+		if (line.StartsWith("//"))
+			return;
+
+		//Split string into command and arguments but dont split arguments with spaces or double or single quotes
+		string[] parts = LineRegex().Split(line.TrimStart()).Select(x => x.Trim()).ToArray();
+
+		if (parts.Length == 0)
             return;
 
         string command = parts[0];
@@ -125,6 +131,7 @@ public static class Program
 
                 Directory.SetCurrentDirectory(path);
                 break;
+			case "run":
             case "exec":
                 if (args.Length == 0)
                     throw new Exception("No command provided.");
@@ -159,4 +166,7 @@ public static class Program
                 throw new Exception($"Unknown command '{command}'.");
         }
     }
+
+	[GeneratedRegex("\\s(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)(?=(?:[^']*'[^']*')*[^']*$)")]
+	private static partial Regex LineRegex();
 }

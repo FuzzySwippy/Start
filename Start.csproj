@@ -7,7 +7,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyName>skill</AssemblyName>
+    <AssemblyName>start</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
