@@ -107,7 +107,7 @@ public static partial class Program
 
     static void ParseAndExecuteLine(string line)
     { 
-		if (line.StartsWith("//"))
+		if (line.StartsWith("//") || string.IsNullOrWhiteSpace(line))
 			return;
 
 		//Split string into command and arguments but dont split arguments with spaces or double or single quotes
