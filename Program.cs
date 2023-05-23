@@ -103,6 +103,7 @@ public static partial class Program
                 return;
             }
         }
+		Console.WriteLine("Done! ^-^");
     }
 
     static void ParseAndExecuteLine(string line)
@@ -138,6 +139,20 @@ public static partial class Program
 
                 Process.Start(args[0], string.Join(' ', args.Skip(1))).WaitForExit();
                 break;
+			case "runbg":
+			case "execbg":
+			case "run-bg":
+			case "exec-bg":
+				if (args.Length == 0)
+					throw new Exception("No command provided.");
+
+				Process.Start(new ProcessStartInfo() 
+				{ 
+					FileName = args[0],
+					Arguments = string.Join(' ', args.Skip(1)),
+					UseShellExecute = true
+				});
+				break;
             case "mkdir":
                 if (args.Length == 0)
                     throw new Exception("No directory provided.");
