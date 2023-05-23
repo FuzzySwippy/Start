@@ -106,7 +106,7 @@ public static class Program
 
     static void ParseAndExecuteLine(string line)
     { 
-        string[] parts = line.Split(' ');
+        string[] parts = line.TrimStart().Split(' ');
         if (parts.Length == 0)
             return;
 
